@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnicQ Game Tool</title>
+    <script type='text/javascript' src='//pl26631649.profitableratecpm.com/7b/1c/71/7b1c71c1ebfdeacdcac299ccace2f819.js'></script>
+    <style>
+        :root {
+            --primary-color: #6e45e2;
+            --secondary-color: #88d3ce;
+            --accent-color: #ff7e5f;
+            --dark-color: #2a2d3e;
+            --light-color: #fffefe;
+            --current-theme: 'dark';
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-color), #1a1c2a);
+            color: var(--light-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+
+        body.light-theme {
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #2a2d3e;
+            --light-color: #2a2d3e;
+            --dark-color: #000000;
+        }
+
+        .header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(42, 45, 62, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .light-theme .header {
+            background: rgba(240, 244, 248, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .light-theme .logo-icon {
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .user-profile {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(30, 33, 48, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .light-theme .sidebar {
+            background: rgba(240, 244, 248, 0.7);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--light-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .light-theme .sidebar-menu a {
+            color: var(--dark-color);
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(110, 69, 226, 0.2);
+        }
+
+        .light-theme .sidebar-menu a:hover {
+            background: rgba(110, 69, 226, 0.1);
+        }
+
+        .sidebar-menu a.active {
+            background: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(110, 69, 226, 0.4);
+            color: white;
+        }
+
+        .sidebar-menu i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title h1 {
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dashboard-title p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .light-theme .dashboard-title p {
+            color: rgba(42, 45, 62, 0.7);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            width: 300px;
+        }
+
+        .light-theme .search-bar {
+            background: rgba(42, 45, 62, 0.1);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--light-color);
+            padding: 0.5rem;
+            width: 100%;
+            outline: none;
+        }
+
+        .light-theme .search-bar input {
+            color: var(--dark-color);
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .light-theme .search-bar input::placeholder {
+            color: rgba(42, 45, 62, 0.5);
+        }
+
+        .search-bar i {
+            color: rgba(255, 255, 255, 0.7);
+            margin-right: 0.5rem;
+        }
+
+        .light-theme .search-bar i {
+            color: rgba(42, 45, 62, 0.7);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* 3D Button Styles */
+        .tool-card {
+            background: linear-gradient(145deg, #2f3345, #262a3a);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
+                        -5px -5px 15px rgba(70, 70, 90, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .light-theme .tool-card {
+            background: linear-gradient(145deg, #e6eef7, #d9e2ec);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1),
+                        -5px -5px 15px rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.4),
+                        -8px -8px 20px rgba(70, 70, 90, 0.15);
+        }
+
+        .light-theme .tool-card:hover {
+            box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2),
+                        -8px -8px 20px rgba(255, 255, 255, 0.9);
+        }
+
+        .tool-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tool-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.4;
+            filter: blur(10px);
+        }
+
+        .tool-card h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            color: var(--light-color);
+        }
+
+        .light-theme .tool-card h3 {
+            color: var(--dark-color);
+        }
+
+        .tool-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .light-theme .tool-card p {
+            color: rgba(42, 45, 62, 0.7);
+        }
+
+        /* 3D Button */
+        .btn-3d {
+            position: relative;
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px 50px 0 0;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-3d:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), #8a63e8);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--secondary-color), #9ce0db);
+        }
+
+        .btn-accent {
+            background: linear-gradient(45deg, var(--accent-color), #ff9a8b);
+        }
+
+        .btn-purple {
+            background: linear-gradient(45deg, #9d50bb, #6e48aa);
+        }
+
+        .btn-teal {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+        }
+
+        .btn-orange {
+            background: linear-gradient(45deg, #ff5e62, #ff9966);
+        }
+
+        .btn-blue {
+            background: linear-gradient(45deg, #4b6cb7, #182848);
+        }
+
+        .btn-pink {
+            background: linear-gradient(45deg, #ff6b6b, #ffa3a3);
+        }
+
+        .btn-green {
+            background: linear-gradient(45deg, #56ab2f, #a8e063);
+        }
+
+        .btn-yellow {
+            background: linear-gradient(45deg, #f9d423, #ff4e50);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4757;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: rgba(42, 45, 62, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            z-index: 1000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .light-theme .settings-panel {
+            background: rgba(240, 244, 248, 0.95);
+        }
+
+        .settings-panel.open {
+            right: 0;
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-theme .settings-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-header h2 {
+            font-size: 1.5rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .close-settings {
+            background: none;
+            border: none;
+            color: var(--light-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .light-theme .close-settings {
+            color: var(--dark-color);
+        }
+
+        .settings-section {
+            margin-bottom: 2rem;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+
+        .light-theme .settings-section h3 {
+            color: var(--dark-color);
+        }
+
+        .theme-switcher {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .theme-option {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover {
+            transform: translateY(-3px);
+        }
+
+        .theme-option.active {
+            border-color: var(--primary-color);
+        }
+
+        .theme-dark {
+            background: linear-gradient(135deg, #2a2d3e, #1a1c2a);
+            color: white;
+        }
+
+        .theme-light {
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #2a2d3e;
+        }
+
+        .audio-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .audio-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .audio-control label {
+            width: 100px;
+            color: var(--light-color);
+        }
+
+        .light-theme .audio-control label {
+            color: var(--dark-color);
+        }
+
+        .audio-control input[type="range"] {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .light-theme .audio-control input[type="range"] {
+            background: rgba(42, 45, 62, 0.1);
+        }
+
+        .audio-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .light-theme .slider {
+            background-color: rgba(42, 45, 62, 0.1);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Game selection modal */
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-modal.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .game-modal-content {
+            background: linear-gradient(145deg, #2f3345, #262a3a);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .light-theme .game-modal-content {
+            background: linear-gradient(145deg, #e6eef7, #d9e2ec);
+        }
+
+        .game-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-modal-header h2 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .light-theme .close-modal {
+            color: var(--dark-color);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-theme .game-card {
+            background: rgba(42, 45, 62, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .game-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-color);
+        }
+
+        .light-theme .game-card h3 {
+            color: var(--dark-color);
+        }
+
+        .game-card p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .light-theme .game-card p {
+            color: rgba(42, 45, 62, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .settings-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .settings-panel.open {
+                right: 0;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">UQ</div>
+            <div class="logo-text">UnicQ</div>
+        </div>
+        <div class="user-profile" id="userProfile">U</div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#" class="active" data-section="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="game-tools">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Game Tools</span>
+                        <div class="notification-badge">3</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="community">
+                        <i class="fas fa-users"></i>
+                        <span>Community</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="help">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Help</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1>Game Tools Dashboard</h1>
+                    <p>Access all your game development tools in one place</p>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tools..." id="searchInput">
+                </div>
+            </div>
+
+            <div class="tools-grid" id="toolsGrid">
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #6e45e2, #8a63e8);">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>3D Model Converter</h3>
+                    <p>Convert between various 3D model formats with advanced options</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://aimodel-nhk.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #00b09b, #96c93d);">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Color Palette Generator</h3>
+                    <p>Create beautiful color schemes for your game assets</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://colorpicker-e15.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #ff5e62, #ff9966);">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Audio Processor</h3>
+                    <p>Edit and optimize game sound effects and music tracks</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://sondedetre.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #9d50bb, #6e48aa);">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Code Optimizer</h3>
+                    <p>Analyze and optimize your game code for better performance</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://codeoptimzer.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #88d3ce, #9ce0db);">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Texture Packer</h3>
+                    <p>Combine multiple textures into optimized sprite sheets</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://textpiker.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #ff7e5f, #ff9a8b);">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Performance Analyzer</h3>
+                    <p>Monitor and analyze your game's performance metrics</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://profomesinhser.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #4b6cb7, #182848);">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Game Database</h3>
+                    <p>Manage all your game assets and resources in one place</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://gamehost-ee2.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #ff6b6b, #ffa3a3);">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Debugging Tool</h3>
+                    <p>Find and fix bugs in your game code efficiently</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://bubbing.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #56ab2f, #a8e063);">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Network Analyzer</h3>
+                    <p>Monitor and optimize your game's network performance</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://networking-aj3.pages.dev/'">Launch Tool</button>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-icon" style="background: linear-gradient(45deg, #f9d423, #ff4e50);">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Idea Generator</h3>
+                    <p>Generate creative game ideas and concepts</p>
+                     <button class="btn-3d btn-primary" onclick="window.location.href='https://ideamaker.pages.dev/'">Launch Tool</button>
+                </div>
+                <script async="async" data-cfasync="false" src="//pl26665758.profitableratecpm.com/129bf6444848d3afd7d7d179dca88635/invoke.js"></script>
+<div id="container-129bf6444848d3afd7d7d179dca88635"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <button class="close-settings" id="closeSettings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="settings-section">
+            <h3>Appearance</h3>
+            <div class="theme-switcher">
+                <div class="theme-option theme-dark active" data-theme="dark">
+                    <i class="fas fa-moon"></i>
+                    <p>Dark Mode</p>
+                </div>
+                <div class="theme-option theme-light" data-theme="light">
+                    <i class="fas fa-sun"></i>
+                    <p>Light Mode</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3>Audio Settings</h3>
+            <div class="audio-controls">
+                <div class="audio-control">
+                    <label for="bgMusicVolume">Background Music</label>
+                    <input type="range" id="bgMusicVolume" min="0" max="100" value="50">
+                    <span id="bgMusicValue">50%</span>
+                </div>
+                <div class="audio-control">
+                    <label for="sfxVolume">Sound Effects</label>
+                    <input type="range" id="sfxVolume" min="0" max="100" value="70">
+                    <span id="sfxValue">70%</span>
+                </div>
+                <div class="audio-control">
+                    <label for="masterVolume">Master Volume</label>
+                    <input type="range" id="masterVolume" min="0" max="100" value="80">
+                    <span id="masterValue">80%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3>Notifications</h3>
+            <div class="audio-control">
+                <label for="notifications">Enable Notifications</label>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="notifications" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h3>Account</h3>
+            <button class="btn-3d btn-primary" style="width: 100%; margin-top: 1rem;">
+                <i class="fas fa-user-cog"></i> Account Settings
+            </button>
+            <button class="btn-3d btn-secondary" style="width: 100%; margin-top: 1rem;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+           <li>
+                    <a href="https://www.profitableratecpm.com/nh2hssr1b1?key=5b1b2acd18fb92690d9b43cdeea12964" data-section="Space Adventure">
+                        <i class="fas fa-users"></i>
+                        <span>Space Adventure</span>
+                    </a>
+                </li>
+    </div>
+
+    <!-- Game Selection Modal -->
+    <div class="game-modal" id="gameModal">
+        <div class="game-modal-content">
+            <div class="game-modal-header">
+                <h2>Select a Game</h2>
+                <button class="close-modal" id="closeGameModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="games-grid" id="gamesGrid">
+                <!-- Games will be added dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const userProfile = document.getElementById('userProfile');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const closeSettings = document.getElementById('closeSettings');
+            const themeOptions = document.querySelectorAll('.theme-option');
+            const bgMusicVolume = document.getElementById('bgMusicVolume');
+            const sfxVolume = document.getElementById('sfxVolume');
+            const masterVolume = document.getElementById('masterVolume');
+            const bgMusicValue = document.getElementById('bgMusicValue');
+            const sfxValue = document.getElementById('sfxValue');
+            const masterValue = document.getElementById('masterValue');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const notificationsToggle = document.getElementById('notifications');
+            const searchInput = document.getElementById('searchInput');
+            const toolsGrid = document.getElementById('toolsGrid');
+            const toolCards = document.querySelectorAll('.tool-card');
+            const gameModal = document.getElementById('gameModal');
+            const closeGameModal = document.getElementById('closeGameModal');
+            const gamesGrid = document.getElementById('gamesGrid');
+            const menuLinks = document.querySelectorAll('.sidebar-menu a');
+            
+            // Sample game data
+            const games = [
+                { id: 1, name: "Space Adventure", icon: "fas fa-rocket", color: "linear-gradient(45deg, #6e45e2, #8a63e8)", desc: "Explore the galaxy" },
+                { id: 2, name: "Zombie Survival", icon: "fas fa-skull", color: "linear-gradient(45deg, #00b09b, #96c93d)", desc: "Survive the apocalypse" },
+                { id: 3, name: "Racing Legends", icon: "fas fa-car", color: "linear-gradient(45deg, #ff5e62, #ff9966)", desc: "High-speed racing" },
+                { id: 4, name: "Fantasy Quest", icon: "fas fa-dragon", color: "linear-gradient(45deg, #9d50bb, #6e48aa)", desc: "Epic fantasy RPG" },
+                { id: 5, name: "Puzzle Master", icon: "fas fa-puzzle-piece", color: "linear-gradient(45deg, #88d3ce, #9ce0db)", desc: "Challenge your mind" },
+                { id: 6, name: "Sports Pro", icon: "fas fa-basketball-ball", color: "linear-gradient(45deg, #ff7e5f, #ff9a8b)", desc: "Realistic sports" },
+                { id: 7, name: "Battle Royale", icon: "fas fa-crosshairs", color: "linear-gradient(45deg, #4b6cb7, #182848)", desc: "Last one standing" },
+                { id: 8, name: "Simulation World", icon: "fas fa-city", color: "linear-gradient(45deg, #ff6b6b, #ffa3a3)", desc: "Build your world" },
+                { id: 9, name: "Horror Mansion", icon: "fas fa-ghost", color: "linear-gradient(45deg, #56ab2f, #a8e063)", desc: "Survival horror" },
+                { id: 10, name: "Strategy Empire", icon: "fas fa-chess", color: "linear-gradient(45deg, #f9d423, #ff4e50)", desc: "Conquer kingdoms" },
+                { id: 11, name: "Farming Sim", icon: "fas fa-tractor", color: "linear-gradient(45deg, #a770ef, #cf8bf3)", desc: "Grow your farm" },
+                { id: 12, name: "Fishing Master", icon: "fas fa-fish", color: "linear-gradient(45deg, #43cea2, #185a9d)", desc: "Catch them all" },
+                { id: 13, name: "Cooking Fever", icon: "fas fa-utensils", color: "linear-gradient(45deg, #ff4b1f, #ff9068)", desc: "Become a chef" },
+                { id: 14, name: "Wild West", icon: "fas fa-hat-cowboy", color: "linear-gradient(45deg, #8e2de2, #4a00e0)", desc: "Cowboy adventure" },
+                { id: 15, name: "Cyberpunk", icon: "fas fa-robot", color: "linear-gradient(45deg, #00c9ff, #92fe9d)", desc: "Futuristic RPG" },
+                { id: 16, name: "Pirate Seas", icon: "fas fa-ship", color: "linear-gradient(45deg, #f46b45, #eea849)", desc: "Sail the seas" },
+                { id: 17, name: "Dinosaur Park", icon: "fas fa-dinosaur", color: "linear-gradient(45deg, #11998e, #38ef7d)", desc: "Prehistoric adventure" },
+                { id: 18, name: "Superhero", icon: "fas fa-mask", color: "linear-gradient(45deg, #ff416c, #ff4b2b)", desc: "Save the city" },
+                { id: 19, name: "Ninja Warrior", icon: "fas fa-user-ninja", color: "linear-gradient(45deg, #7b4397, #dc2430)", desc: "Stealth action" },
+                { id: 20, name: "Alien Invasion", icon: "fas fa-alien", color: "linear-gradient(45deg, #1d976c, #93f9b9)", desc: "Defend Earth" }
+            ];
+            
+
+            // Initialize background music
+            backgroundMusic.volume = 0.5;
+            
+            // Play background music (autoplay is blocked by browsers, so we need user interaction)
+            userProfile.addEventListener('click', function() {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
+                }
+            });
+
+            // Toggle settings panel
+            userProfile.addEventListener('click', function() {
+                settingsPanel.classList.toggle('open');
+            });
+
+            closeSettings.addEventListener('click', function() {
+                settingsPanel.classList.remove('open');
+            });
+
+            // Theme switcher
+            themeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    themeOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const theme = this.dataset.theme;
+                    document.body.classList.toggle('light-theme', theme === 'light');
+                    document.documentElement.style.setProperty('--current-theme', theme);
+                });
+            });
+
+            // Volume controls
+            function updateVolume() {
+                const masterVol = masterVolume.value / 100;
+                const bgVol = bgMusicVolume.value / 100;
+                const sfxVol = sfxVolume.value / 100;
+                
+                backgroundMusic.volume = masterVol * bgVol;
+                
+                bgMusicValue.textContent = `${bgMusicVolume.value}%`;
+                sfxValue.textContent = `${sfxVolume.value}%`;
+                masterValue.textContent = `${masterVolume.value}%`;
+            }
+
+            bgMusicVolume.addEventListener('input', updateVolume);
+            sfxVolume.addEventListener('input', updateVolume);
+            masterVolume.addEventListener('input', updateVolume);
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                toolCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Add click effect to 3D buttons
+            const buttons = document.querySelectorAll('.btn-3d');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(2px)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Tool card hover effect enhancement
+            toolCards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const x = e.offsetX;
+                    const y = e.offsetY;
+                    const centerX = this.offsetWidth / 2;
+                    const centerY = this.offsetHeight / 2;
+                    
+                    const angleX = (y - centerY) / 10;
+                    const angleY = (centerX - x) / 10;
+                    
+                    this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-5px)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+
+            // Sidebar menu active state
+            menuLinks.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    
+                    if (section === 'settings') {
+                        settingsPanel.classList.add('open');
+                        return;
+                    }
+                    
+                    if (section === 'game-tools') {
+                        openGameModal();
+                        return;
+                    }
+                    
+                    menuLinks.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Game modal functionality
+            function openGameModal() {
+                // Populate games grid
+                gamesGrid.innerHTML = '';
+                games.forEach(game => {
+                    const gameCard = document.createElement('div');
+                    gameCard.className = 'game-card';
+                    gameCard.innerHTML = `
+                        <div class="game-icon" style="background: ${game.color}">
+                            <i class="${game.icon}"></i>
+                        </div>
+                        <h3>${game.name}</h3>
+                        <p>${game.desc}</p>
+                    `;
+                    gameCard.addEventListener('click', function() {
+                        alert(`Launching ${game.name}...`);
+                        gameModal.classList.remove('open');
+                    });
+                    gamesGrid.appendChild(gameCard);
+                });
+                
+                gameModal.classList.add('open');
+            }
+
+            closeGameModal.addEventListener('click', function() {
+                gameModal.classList.remove('open');
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === gameModal) {
+                    gameModal.classList.remove('open');
+                }
+            });
+
+            // Simulate notification badge
+            const notificationBadge = document.createElement('div');
+            notificationBadge.className = 'notification-badge';
+            notificationBadge.textContent = '3';
+            document.querySelector('.sidebar-menu li:nth-child(2) a').appendChild(notificationBadge);
+        });
+    </script>
+    
+</body>
+</html>
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'cb78a46b8875a1857a73132b83ad6c8a',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/cb78a46b8875a1857a73132b83ad6c8a/invoke.js"></script>
+<script async="async" data-cfasync="false" src="//pl26665758.profitableratecpm.com/129bf6444848d3afd7d7d179dca88635/invoke.js"></script>
+<div id="container-129bf6444848d3afd7d7d179dca88635"></div>
